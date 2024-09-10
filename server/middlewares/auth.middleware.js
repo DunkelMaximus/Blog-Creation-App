@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
 export const protectRoute = async (req, res, next) => {
   try {
-    let token = req.headers["Authorization"];
+    let token = req.headers["authorization"];
 
     if (!token) {
       return res.status(401).json({
@@ -12,7 +12,7 @@ export const protectRoute = async (req, res, next) => {
       });
     }
 
-    let isValidToken = jwt.verify(token, process.env.JWT_SECRET);
+    let isValidToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     if (!isValidToken) {
       return res

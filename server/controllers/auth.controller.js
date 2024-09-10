@@ -8,6 +8,16 @@ const generateToken = (id) => {
   });
 };
 
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ status: "Success", data: users });
+  } catch (error) {
+    console.log("Error in getAllUsers controller: ", error.message);
+    res.status(500).json({ status: "Failure", message: error.message });
+  }
+};
+
 export const createNewUser = async (req, res) => {
   let { username, email, password } = req.body;
 
