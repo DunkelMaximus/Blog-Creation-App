@@ -4,6 +4,7 @@ import cors from "cors";
 
 import connectToDB from "./lib/db.js";
 import userRoutes from "./routes/auth.route.js";
+import postRoutes from "./routes/post.route.js";
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ const PORT = process.env.PORT || 5001;
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", userRoutes);
+app.use("/api/auth", userRoutes);
+app.use("/api/posts", postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
